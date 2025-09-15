@@ -3,683 +3,629 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LP制作・UI/UX設計 + E2Eテスト自動化 - エンジーニアス採用LP制作事例</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Rounded+Mplus+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Senior Frontend Engineer Portfolio</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        .font-rounded {
-            font-family: 'Rounded Mplus 1c', sans-serif;
-        }
-        .bg-gradient-pink {
-            background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%);
-        }
-        .bg-gradient-tech {
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
-        }
-        .shadow-custom {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .page-section {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 2rem 0;
         }
-        @media print {
-            .page-section {
-                page-break-inside: avoid;
-                min-height: auto;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 300% 100%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .profile-info h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-info .title {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9em;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .experience-item {
+            background: rgba(102, 126, 234, 0.03);
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background: rgba(102, 126, 234, 0.08);
+            transform: translateX(5px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-title {
+            font-size: 1.3em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .project-period {
+            color: #666;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .project-role {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-item {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            border: 1px solid rgba(118, 75, 162, 0.2);
+        }
+
+        .achievements {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .achievements h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .achievement-list {
+            list-style: none;
+        }
+
+        .achievement-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .achievement-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .strength-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .strength-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .cta-section h2::after {
+            background: white;
+            margin: 10px auto 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: #f8f9ff;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .project-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
-<body class="bg-gray-50">
-
-    <!-- Cover Page -->
-    <section class="page-section bg-gradient-pink flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="w-full h-full bg-pink-100 transform rotate-12 scale-150"></div>
-        </div>
-        <div class="container mx-auto px-8 text-center relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="mb-8">
-                    <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_lossy,ret_img/https://engenius.jp/recruit/momo/wp-content/themes/momo-lp/images/momo-sitting.jpg" 
-                         alt="採用担当ももさん" 
-                         class="w-64 h-64 object-cover rounded-full mx-auto shadow-custom border-8 border-white">
-                </div>
-                <h1 class="text-5xl font-rounded font-bold text-gray-800 mb-6">
-                    LP制作・UI/UX設計<br>
-                    <span class="text-pink-600">＋ E2Eテスト自動化</span>
-                </h1>
-                <h2 class="text-3xl font-rounded font-medium text-pink-700 mb-8">
-                    エンジーニアス採用LP制作事例
-                </h2>
-                <div class="bg-white rounded-xl p-8 shadow-custom max-w-3xl mx-auto">
-                    <p class="text-xl text-gray-700 leading-relaxed">
-                        採用担当者の思いを100%表現し、応募動線を最適化したLPと、<br>
-                        <span class="font-bold text-purple-600">Playwrightによる品質保証の自動化</span>
-                    </p>
-                </div>
-                <div class="absolute bottom-8 right-8 text-right">
-                    <p class="text-gray-600 font-medium">制作者：牧野</p>
-                    <p class="text-gray-500">2024年8月</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Overview -->
-    <section class="page-section bg-white">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">プロジェクト概要</h2>
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4 flex items-center">
-                                <i class="fas fa-target mr-3"></i>目的
-                            </h3>
-                            <ul class="space-y-3 text-gray-700 text-lg">
-                                <li class="flex items-start">
-                                    <i class="fas fa-heart text-pink-500 mt-1 mr-3"></i>
-                                    採用担当者「ももさん」の人柄を前面に出し、20代初級エンジニアが「気軽に相談」できる心理的ハードルを下げる
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-chart-line text-pink-500 mt-1 mr-3"></i>
-                                    LINE相談・エントリーのCVR（コンバージョン率）向上
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4 flex items-center">
-                                <i class="fas fa-users mr-3"></i>ターゲット
-                            </h3>
-                            <ul class="space-y-3 text-gray-700 text-lg">
-                                <li class="flex items-start">
-                                    <i class="fas fa-user-tie text-blue-500 mt-1 mr-3"></i>
-                                    20代 初級エンジニア
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-question-circle text-blue-500 mt-1 mr-3"></i>
-                                    現職への不安や転職意欲があるが、まだ行動できていない層
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-rounded font-bold text-purple-600 mb-4 flex items-center">
-                                <i class="fas fa-trophy mr-3"></i>成果
-                            </h3>
-                            <div class="bg-gradient-tech p-6 rounded-xl">
-                                <p class="text-gray-800 text-lg font-medium">
-                                    <i class="fas fa-robot text-purple-600 mr-2"></i>
-                                    Playwrightによる自動テストを導入し、UI変更時の品質維持を実現
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-xl p-8 shadow-custom">
-                            <div class="bg-white rounded-lg p-4 mb-4">
-                                <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_lossy,ret_img/https://engenius.jp/recruit/momo/wp-content/themes/momo-lp/images/momo-pointing.jpg" 
-                                     alt="LPスクリーンショット" 
-                                     class="w-full rounded-lg">
-                            </div>
-                            <p class="text-gray-600 font-medium">エンジーニアス採用LP</p>
-                            <p class="text-sm text-gray-500">https://engenius.jp/recruit/momo/</p>
-                        </div>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <div class="profile-section">
+                <div class="profile-image"><img src="./profile-illustration.png" alt="プロフィールイラスト"></div>
+                <div class="profile-info">
+                    <h1>Senior Frontend Engineer</h1>
+                    <p class="title">Developer & UI/UX Designer | Project Leader</p>
+                    <div class="contact-info">
+                        <div class="contact-item">📍顧客要望をヒアリングし、要件定義〜プロトタイプ作成を実施</div>
+                        <div class="contact-item">💼8年間のシステム開発経験</div>
+                        <div class="contact-item">🌏 Figma / Adobe XDでのデザインシステム設計</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- LP Design Structure -->
-    <section class="page-section bg-gradient-pink">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">LPデザインの全体構成</h2>
-                <div class="space-y-16">
-                    <!-- Section 1 -->
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4">1. ファーストビュー</h3>
-                            <p class="text-gray-700 text-lg mb-4">笑顔写真＋共感メッセージで「話しやすさ」を最大化</p>
-                            <div class="bg-pink-50 p-4 rounded-lg">
-                                <p class="text-pink-800 font-medium">「話しかけやすい人事」がモットーです。</p>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_lossy,ret_img/https://engenius.jp/recruit/momo/wp-content/themes/momo-lp/images/momo-sitting.jpg" 
-                                 alt="ファーストビュー" 
-                                 class="w-full max-w-sm mx-auto rounded-xl shadow-custom">
-                        </div>
+        </header>
+        <section class="section fade-in">
+            <h2>🛠️ 技術スキル</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend Development (6年)</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Vuetify</span>
+                        <span class="skill-tag">jQuery</span>
+                        <span class="skill-tag">Bootstrap</span>
                     </div>
-
-                    <!-- Section 2 -->
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="text-center order-2 lg:order-1">
-                            <div class="bg-white rounded-xl p-6 shadow-custom">
-                                <h4 class="text-lg font-bold text-gray-800 mb-4">共感セクション例</h4>
-                                <div class="space-y-4">
-                                    <div class="bg-blue-50 p-4 rounded-lg text-left">
-                                        <p class="text-blue-800">💭 もっとスキルアップしたいけど、今の職場じゃ機会がなくて…</p>
-                                    </div>
-                                    <div class="bg-green-50 p-4 rounded-lg text-left">
-                                        <p class="text-green-800">💭 頑張りが正当に評価されてない気がして、モヤモヤする…</p>
-                                    </div>
-                                    <div class="bg-yellow-50 p-4 rounded-lg text-left">
-                                        <p class="text-yellow-800">💭 会社の雰囲気や人間関係が、なんだか合わないかも…</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-xl p-8 shadow-custom order-1 lg:order-2">
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4">2. 共感セクション</h3>
-                            <p class="text-gray-700 text-lg mb-4">よくある悩みを吹き出しで表現</p>
-                            <div class="bg-pink-50 p-4 rounded-lg">
-                                <p class="text-pink-800 font-medium">ユーザーの心の声を代弁し、心理的な距離を縮める</p>
-                            </div>
-                        </div>
+                </div>
+                <div class="skill-category">
+                    <h3>UI/UX Design (7年)</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">レスポンシブデザイン</span>
+                        <span class="skill-tag">ユーザビリティ設計</span>
                     </div>
-
-                    <!-- Section 3 -->
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4">3. 解決策提示</h3>
-                            <p class="text-gray-700 text-lg mb-4">実際の福利厚生や働き方の強みを具体的に</p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-calendar-check text-green-500 mr-3"></i>
-                                    <span class="text-gray-700">有給上限突破制度（268%実績）</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-briefcase text-blue-500 mr-3"></i>
-                                    <span class="text-gray-700">案件選択制＋待機中給与100%保証</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-clock text-purple-500 mr-3"></i>
-                                    <span class="text-gray-700">残業月10時間以内</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-white rounded-xl p-6 shadow-custom">
-                                <h4 class="text-lg font-bold text-gray-800 mb-4">福利厚生の強み</h4>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-green-50 p-4 rounded-lg">
-                                        <div class="text-2xl font-bold text-green-600">268%</div>
-                                        <div class="text-sm text-green-800">有給取得率</div>
-                                    </div>
-                                    <div class="bg-blue-50 p-4 rounded-lg">
-                                        <div class="text-2xl font-bold text-blue-600">10,000+</div>
-                                        <div class="text-sm text-blue-800">案件選択肢</div>
-                                    </div>
-                                    <div class="bg-purple-50 p-4 rounded-lg">
-                                        <div class="text-2xl font-bold text-purple-600">10h</div>
-                                        <div class="text-sm text-purple-800">月残業時間</div>
-                                    </div>
-                                    <div class="bg-pink-50 p-4 rounded-lg">
-                                        <div class="text-2xl font-bold text-pink-600">100%</div>
-                                        <div class="text-sm text-pink-800">給与保証</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend & Database</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">API連携</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Google Analytics</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Project Management (5年)</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">プロジェクトリーダー</span>
+                        <span class="skill-tag">進捗管理</span>
+                        <span class="skill-tag">顧客折衝</span>
+                        <span class="skill-tag">品質管理</span>
+                        <span class="skill-tag">見積作成</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages & Others</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">英語（実用英検準2級）</span>
+                        <span class="skill-tag">ITパスポート</span>
+                        <span class="skill-tag">Excel VBA</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- UI/UX Design -->
-    <section class="page-section bg-white">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">UI/UX設計の工夫</h2>
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div class="bg-blue-50 rounded-xl p-8">
-                            <h3 class="text-2xl font-rounded font-bold text-blue-600 mb-4 flex items-center">
-                                <i class="fas fa-mouse-pointer mr-3"></i>ユーザー心理に合わせたCTA配置
-                            </h3>
-                            <ul class="space-y-3 text-gray-700">
-                                <li class="flex items-start">
-                                    <i class="fas fa-arrow-up text-blue-500 mt-1 mr-3"></i>
-                                    上部・中部・下部にCTAを分散配置
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-comments text-green-500 mt-1 mr-3"></i>
-                                    「話してみる」ボタンを強調色で統一
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="bg-green-50 rounded-xl p-8">
-                            <h3 class="text-2xl font-rounded font-bold text-green-600 mb-4 flex items-center">
-                                <i class="fas fa-mobile-alt mr-3"></i>スマホ最適化
-                            </h3>
-                            <ul class="space-y-3 text-gray-700">
-                                <li class="flex items-start">
-                                    <i class="fas fa-stopwatch text-green-500 mt-1 mr-3"></i>
-                                    ファーストビューで縦スクロール3秒以内にCTAが視認可能
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-hand-holding-heart text-pink-500 mt-1 mr-3"></i>
-                                    タップしやすいボタンサイズと配置
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-pink-50 rounded-xl p-8">
-                            <h3 class="text-2xl font-rounded font-bold text-pink-600 mb-4 flex items-center">
-                                <i class="fas fa-heart mr-3"></i>共感ファースト設計
-                            </h3>
-                            <p class="text-gray-700">権威性よりも共感を重視したテキストライティング</p>
-                            <div class="mt-4 p-4 bg-white rounded-lg border-l-4 border-pink-500">
-                                <p class="text-pink-800 italic">「転職がすべてだとは思いません。でも、今の場所で悩み続ける必要もありません。」</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="bg-gray-100 rounded-xl p-8 shadow-custom">
-                            <h4 class="text-xl font-bold text-gray-800 mb-6">UI設計プロセス</h4>
-                            <div class="space-y-6">
-                                <div class="flex items-center justify-between bg-white p-4 rounded-lg">
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">1</span>
-                                    <span class="text-gray-700 flex-1 mx-4">ユーザー心理分析</span>
-                                    <i class="fas fa-brain text-blue-500"></i>
-                                </div>
-                                <div class="flex items-center justify-between bg-white p-4 rounded-lg">
-                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">2</span>
-                                    <span class="text-gray-700 flex-1 mx-4">ワイヤーフレーム設計</span>
-                                    <i class="fas fa-drafting-compass text-green-500"></i>
-                                </div>
-                                <div class="flex items-center justify-between bg-white p-4 rounded-lg">
-                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">3</span>
-                                    <span class="text-gray-700 flex-1 mx-4">プロトタイプ検証</span>
-                                    <i class="fas fa-mobile-alt text-purple-500"></i>
-                                </div>
-                                <div class="flex items-center justify-between bg-white p-4 rounded-lg">
-                                    <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm font-medium">4</span>
-                                    <span class="text-gray-700 flex-1 mx-4">レスポンシブ実装</span>
-                                    <i class="fas fa-code text-pink-500"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="section fade-in">
+            <h2>💪 強み・特徴</h2>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <div class="strength-icon">🎯</div>
+                    <h3>フルスタック対応</h3>
+                    <p>フロントエンド、UI/UXデザインまで、開発ライフサイクル全体をカバー</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">👥</div>
+                    <h3>プレイングマネージャー</h3>
+                    <p>最大4名のチーム牽引経験。技術的実装とマネジメント両方を並行して遂行</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">💡</div>
+                    <h3>ユーザー中心設計</h3>
+                    <p>単なる機能実装ではなく、エンドユーザーの使いやすさを徹底追求したUI/UX設計</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">🤝</div>
+                    <h3>顧客コミュニケーション</h3>
+                    <p>直接的な顧客折衝により要望を的確に把握し、期待値調整と信頼関係構築を実現</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Playwright Testing -->
-    <section class="page-section bg-gradient-tech">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">
-                    <i class="fas fa-robot text-purple-600 mr-4"></i>Playwrightによる自動テスト
-                </h2>
-                <div class="grid lg:grid-cols-2 gap-12 items-start">
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-purple-600 mb-4 flex items-center">
-                                <i class="fas fa-lightbulb mr-3"></i>導入背景
-                            </h3>
-                            <p class="text-gray-700 text-lg">LP更新頻度が高く、フォームやCTAのリンク切れリスクあり</p>
-                        </div>
-
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-purple-600 mb-4 flex items-center">
-                                <i class="fas fa-list-check mr-3"></i>テスト内容
-                            </h3>
-                            <ul class="space-y-3 text-gray-700">
-                                <li class="flex items-start">
-                                    <i class="fas fa-envelope text-blue-500 mt-1 mr-3"></i>
-                                    フォーム入力〜送信動作確認
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-link text-green-500 mt-1 mr-3"></i>
-                                    各CTAリンクの遷移確認
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-mobile-alt text-purple-500 mt-1 mr-3"></i>
-                                    スマホ表示での要素崩れ検出
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-green-50 rounded-xl p-8 border-2 border-green-200">
-                            <h3 class="text-2xl font-rounded font-bold text-green-600 mb-4 flex items-center">
-                                <i class="fas fa-chart-line mr-3"></i>効果
-                            </h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-red-500">5分</div>
-                                    <div class="text-sm text-gray-600">手動確認時間</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-green-500">15秒</div>
-                                    <div class="text-sm text-gray-600">自動テスト時間</div>
-                                </div>
-                            </div>
-                            <div class="mt-4 text-center">
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                    ヒューマンエラーゼロ化達成
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-900 rounded-xl p-6 shadow-custom text-green-400 font-mono text-sm">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-terminal mr-2"></i>
-                            <span class="text-white">playwright-test.js</span>
-                        </div>
-                        <pre class="overflow-x-auto">
-<span class="text-purple-400">import</span> { <span class="text-yellow-400">test</span>, <span class="text-yellow-400">expect</span> } <span class="text-purple-400">from</span> <span class="text-green-300">'@playwright/test'</span>;
-
-<span class="text-yellow-400">test</span>(<span class="text-green-300">'エンジーニアス採用LP - CTA動作確認'</span>, <span class="text-purple-400">async</span> ({ <span class="text-yellow-400">page</span> }) => {
-  <span class="text-gray-500">// LPにアクセス</span>
-  <span class="text-purple-400">await</span> page.<span class="text-yellow-400">goto</span>(<span class="text-green-300">'https://engenius.jp/recruit/momo/'</span>);
-  
-  <span class="text-gray-500">// ファーストビューのCTAボタンを確認</span>
-  <span class="text-purple-400">const</span> firstCta = page.<span class="text-yellow-400">locator</span>(<span class="text-green-300">'.cta-button'</span>).<span class="text-yellow-400">first</span>();
-  <span class="text-purple-400">await</span> <span class="text-yellow-400">expect</span>(firstCta).<span class="text-yellow-400">toBeVisible</span>();
-  
-  <span class="text-gray-500">// スマホ表示での要素確認</span>
-  <span class="text-purple-400">await</span> page.<span class="text-yellow-400">setViewportSize</span>({ <span class="text-blue-400">width</span>: <span class="text-orange-400">375</span>, <span class="text-blue-400">height</span>: <span class="text-orange-400">667</span> });
-  <span class="text-purple-400">await</span> <span class="text-yellow-400">expect</span>(firstCta).<span class="text-yellow-400">toBeInViewport</span>();
-  
-  <span class="text-gray-500">// フォーム送信テスト</span>
-  <span class="text-purple-400">await</span> page.<span class="text-yellow-400">fill</span>(<span class="text-green-300">'input[name="email"]'</span>, <span class="text-green-300">'test@example.com'</span>);
-  <span class="text-purple-400">await</span> page.<span class="text-yellow-400">click</span>(<span class="text-green-300">'button[type="submit"]'</span>);
-  
-  <span class="text-gray-500">// 送信完了ページの確認</span>
-  <span class="text-purple-400">await</span> <span class="text-yellow-400">expect</span>(page).<span class="text-yellow-400">toHaveURL</span>(<span class="text-green-300">/.*thank-you.*/</span>);
-});
-
-<span class="text-yellow-400">test</span>(<span class="text-green-300">'全CTAリンクの健全性チェック'</span>, <span class="text-purple-400">async</span> ({ <span class="text-yellow-400">page</span> }) => {
-  <span class="text-purple-400">await</span> page.<span class="text-yellow-400">goto</span>(<span class="text-green-300">'https://engenius.jp/recruit/momo/'</span>);
-  
-  <span class="text-purple-400">const</span> ctaButtons = <span class="text-purple-400">await</span> page.<span class="text-yellow-400">locator</span>(<span class="text-green-300">'.cta-button'</span>).<span class="text-yellow-400">all</span>();
-  
-  <span class="text-purple-400">for</span> (<span class="text-purple-400">const</span> button <span class="text-purple-400">of</span> ctaButtons) {
-    <span class="text-purple-400">const</span> href = <span class="text-purple-400">await</span> button.<span class="text-yellow-400">getAttribute</span>(<span class="text-green-300">'href'</span>);
-    <span class="text-purple-400">if</span> (href) {
-      <span class="text-purple-400">const</span> response = <span class="text-purple-400">await</span> page.<span class="text-yellow-400">request</span>.<span class="text-yellow-400">get</span>(href);
-      <span class="text-purple-400">await</span> <span class="text-yellow-400">expect</span>(response.<span class="text-yellow-400">status</span>()).<span class="text-yellow-400">toBeLessThan</span>(<span class="text-orange-400">400</span>);
-    }
-  }
-});
-                        </pre>
-                        <div class="mt-4 text-center">
-                            <span class="bg-green-800 text-green-200 px-3 py-1 rounded text-xs">
-                                ✓ All tests passed in 15.2s
-                            </span>
-                        </div>
-                    </div>
+        <section class="section fade-in">
+            <h2>🚀 主要プロジェクト実績</h2>
+            <div class="experience-item">
+                <div class="project-header">
+                    <div class="project-title">セキュリティ系WEBシステム 受け入れ試験要領書作成、実施</div>
+                    <div class="project-period">2025年08月〜現在</div>
+                </div>
+                <div class="project-role">メンバー | チーム3名</div>
+                <div class="project-description">
+                    オフショアで作られたコード（フロント側）の受け入れ試験要領書作成、受け入れ試験実施。
+                    オフショア開発観点の要件と顧客の要件を擦り合わせ、試験項目書としての落とし込みを実施。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">英語ドキュメント読み書き</span>
+                    <span class="tech-item">受け入れ試験</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Technology Stack -->
-    <section class="page-section bg-white">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">技術スタック</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-orange-50 rounded-xl p-8 text-center shadow-custom">
-                        <i class="fab fa-html5 text-6xl text-orange-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">HTML5</h3>
-                        <p class="text-gray-600">セマンティックマークアップ</p>
-                    </div>
-                    <div class="bg-blue-50 rounded-xl p-8 text-center shadow-custom">
-                        <i class="fab fa-css3-alt text-6xl text-blue-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">CSS3</h3>
-                        <p class="text-gray-600">レスポンシブデザイン</p>
-                    </div>
-                    <div class="bg-yellow-50 rounded-xl p-8 text-center shadow-custom">
-                        <i class="fab fa-wordpress text-6xl text-blue-600 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">WordPress</h3>
-                        <p class="text-gray-600">CMS実装</p>
-                    </div>
-                    <div class="bg-purple-50 rounded-xl p-8 text-center shadow-custom">
-                        <i class="fas fa-robot text-6xl text-purple-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Playwright</h3>
-                        <p class="text-gray-600">E2Eテスト自動化</p>
-                    </div>
+            <div class="experience-item">
+                <div class="project-header">
+                    <div class="project-title">オンライン動画配信プラットフォーム UX改善</div>
+                    <div class="project-period">2025年02月～06月</div>
                 </div>
-                
-                <div class="mt-16 bg-gray-50 rounded-xl p-8">
-                    <h3 class="text-2xl font-rounded font-bold text-center text-gray-800 mb-8">開発フロー</h3>
-                    <div class="flex flex-wrap justify-center items-center gap-4">
-                        <div class="bg-white px-6 py-3 rounded-full shadow">
-                            <span class="font-medium text-gray-800">要件定義</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-gray-400"></i>
-                        <div class="bg-white px-6 py-3 rounded-full shadow">
-                            <span class="font-medium text-gray-800">UI/UX設計</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-gray-400"></i>
-                        <div class="bg-white px-6 py-3 rounded-full shadow">
-                            <span class="font-medium text-gray-800">フロントエンド実装</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-gray-400"></i>
-                        <div class="bg-white px-6 py-3 rounded-full shadow">
-                            <span class="font-medium text-gray-800">テスト実装</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-gray-400"></i>
-                        <div class="bg-white px-6 py-3 rounded-full shadow">
-                            <span class="font-medium text-gray-800">リリース</span>
-                        </div>
-                    </div>
+                <div class="project-role">メンバー | チーム3名</div>
+                <div class="project-description">
+                    管理画面の課題洗い出しから改修まで、ユーザー体験向上を実現するフロントエンド開発を担当。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Figma</span>
+                    <span class="tech-item">Vue.js</span>
+                    <span class="tech-item">Vuetify</span>
+                    <span class="tech-item">API連携</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Results and Reflection -->
-    <section class="page-section bg-gradient-pink">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-rounded font-bold text-center text-gray-800 mb-16">成果と振り返り</h2>
-                <div class="grid lg:grid-cols-2 gap-12">
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-green-600 mb-6 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i>定量的成果
-                            </h3>
-                            <div class="grid grid-cols-2 gap-6">
-                                <div class="text-center">
-                                    <div class="text-4xl font-bold text-green-500">100%</div>
-                                    <div class="text-sm text-gray-600">テスト合格率</div>
-                                    <div class="text-xs text-gray-500 mt-1">UI変更後も安定</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-4xl font-bold text-blue-500">95%</div>
-                                    <div class="text-sm text-gray-600">工数削減</div>
-                                    <div class="text-xs text-gray-500 mt-1">5分 → 15秒</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-4xl font-bold text-purple-500">0</div>
-                                    <div class="text-sm text-gray-600">ヒューマンエラー</div>
-                                    <div class="text-xs text-gray-500 mt-1">自動化により実現</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-4xl font-bold text-pink-500">24/7</div>
-                                    <div class="text-sm text-gray-600">監視体制</div>
-                                    <div class="text-xs text-gray-500 mt-1">継続的テスト実行</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-purple-600 mb-4 flex items-center">
-                                <i class="fas fa-lightbulb mr-3"></i>学びと洞察
-                            </h3>
-                            <div class="space-y-4">
-                                <div class="border-l-4 border-pink-500 pl-4">
-                                    <p class="text-gray-800 font-medium">採用LPでは「機能」より「感情価値」が重要</p>
-                                    <p class="text-gray-600 text-sm mt-1">技術力アピールよりも、人柄や企業文化の伝達が転職決定の鍵</p>
-                                </div>
-                                <div class="border-l-4 border-blue-500 pl-4">
-                                    <p class="text-gray-800 font-medium">共感ファーストデザインの効果</p>
-                                    <p class="text-gray-600 text-sm mt-1">ユーザーの悩みを代弁することで心理的距離を大幅に短縮</p>
-                                </div>
-                                <div class="border-l-4 border-green-500 pl-4">
-                                    <p class="text-gray-800 font-medium">継続的品質保証の重要性</p>
-                                    <p class="text-gray-600 text-sm mt-1">頻繁な更新があるLPこそ自動テストの価値が最大化</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-xl p-8 shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold text-orange-600 mb-6 flex items-center">
-                                <i class="fas fa-rocket mr-3"></i>改善点と今後の展開
-                            </h3>
-                            <div class="space-y-6">
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-2">A/Bテストの導入</h4>
-                                    <p class="text-gray-600 text-sm">CTAボタンの色やテキストを変更した際の効果測定</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-2">パフォーマンス最適化</h4>
-                                    <p class="text-gray-600 text-sm">Core Web Vitalsの改善によるSEO強化</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-2">アクセシビリティ向上</h4>
-                                    <p class="text-gray-600 text-sm">WCAG 2.1準拠による利用者層拡大</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-2">マルチバリアント テスト</h4>
-                                    <p class="text-gray-600 text-sm">複数要素の組み合わせ最適化</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-8 border-2 border-purple-200">
-                            <h3 class="text-2xl font-rounded font-bold text-purple-700 mb-4 text-center">
-                                プロジェクトの価値
-                            </h3>
-                            <blockquote class="text-center text-lg text-gray-700 italic">
-                                「技術的な実装力と<br>
-                                ユーザー心理への深い理解、<br>
-                                そして継続的な品質保証―<br><br>
-                                この3つを統合することで、<br>
-                                真に価値のあるWebプロダクトが<br>
-                                生まれる」
-                            </blockquote>
-                        </div>
-                    </div>
+            <div class="experience-item">
+                <div class="project-header">
+                    <div class="project-title">消防設備点検ソフト PWA化プロジェクト</div>
+                    <div class="project-period">2024年10月～2025年01月</div>
+                </div>
+                <div class="project-role">メンバー | チーム3名</div>
+                <div class="project-description">
+                    既存システムのモバイルWEBアプリケーション化により、現場業務のデジタル化を推進。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Figma</span>
+                    <span class="tech-item">Quasar</span>
+                    <span class="tech-item">Vue.js</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Summary & Contact -->
-    <section class="page-section bg-white">
-        <div class="container mx-auto px-8">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="text-center">
-                        <div class="bg-gradient-pink rounded-xl p-8 shadow-custom">
-                            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_lossy,ret_img/https://engenius.jp/recruit/momo/wp-content/themes/momo-lp/images/momo-consulting.jpg" 
-                                 alt="制作風景" 
-                                 class="w-full rounded-lg mb-6">
-                            <h3 class="text-xl font-rounded font-bold text-gray-800 mb-4">制作プロセス</h3>
-                            <div class="space-y-3 text-left">
-                                <div class="flex items-center">
-                                    <i class="fas fa-user-friends text-pink-500 mr-3"></i>
-                                    <span class="text-gray-700">ユーザーインタビュー</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-palette text-purple-500 mr-3"></i>
-                                    <span class="text-gray-700">デザインワークショップ</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-code text-blue-500 mr-3"></i>
-                                    <span class="text-gray-700">アジャイル開発</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-vial text-green-500 mr-3"></i>
-                                    <span class="text-gray-700">継続的テスト</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div class="text-center lg:text-left">
-                            <h2 class="text-4xl font-rounded font-bold text-gray-800 mb-8">まとめ</h2>
-                            <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-8 border-2 border-pink-200">
-                                <p class="text-xl text-gray-800 leading-relaxed">
-                                    本プロジェクトは、採用担当者の想いを<br>
-                                    ユーザーに直接届けるデザインと、<br>
-                                    継続的に品質を守る仕組みを両立しました。
-                                </p>
-                                <div class="mt-6 text-center">
-                                    <div class="inline-flex items-center bg-white px-6 py-3 rounded-full shadow">
-                                        <i class="fas fa-heart text-pink-500 mr-2"></i>
-                                        <span class="font-medium text-gray-800">感情価値 × 技術力</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 rounded-xl p-8 text-white shadow-custom">
-                            <h3 class="text-2xl font-rounded font-bold mb-6 text-center">
-                                <i class="fas fa-envelope mr-3"></i>連絡先
-                            </h3>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div class="space-y-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-envelope text-pink-400 mr-3"></i>
-                                        <span>makino@example.com</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fab fa-github text-purple-400 mr-3"></i>
-                                        <span>github.com/makino</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-globe text-blue-400 mr-3"></i>
-                                        <span>portfolio.makino.dev</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fab fa-linkedin text-blue-500 mr-3"></i>
-                                        <span>linkedin.com/in/makino</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-6 text-center">
-                                <p class="text-gray-300 text-sm">
-                                    UI/UX Design × Frontend Development × Test Automation
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="experience-item">
+                <div class="project-header">
+                    <div class="project-title">自動車会社 営業支援iOSアプリ</div>
+                    <div class="project-period">2019年08月～2024年09月</div>
                 </div>
-
-                <div class="mt-12 text-center">
-                    <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl p-6 shadow-custom">
-                        <p class="text-lg font-medium">
-                            <i class="fas fa-star mr-2"></i>
-                            Thank you for reading
-                            <i class="fas fa-star ml-2"></i>
-                        </p>
-                        <p class="text-sm mt-2 opacity-80">Created with ❤️ by Makino - August 2024</p>
-                    </div>
+                <div class="project-role">プロジェクトリーダー | チーム5名 | 5年間</div>
+                <div class="project-description">
+                    顧客向けiOSアプリの保守・運用から新機能開発まで、長期にわたりプロジェクト全体を牽引。
+                    顧客折衝、進捗管理、品質管理、見積書作成等のマネジメント業務も並行実施。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">要件定義</span>
+                    <span class="tech-item">HTML/CSS</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">Vue.js</span>
+                    <span class="tech-item">Xcode</span>
+                    <span class="tech-item">Tableau</span>
+                    <span class="tech-item">Adobe XD</span>
+                    <span class="tech-item">Photoshop</span>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <div class="experience-item">
+                <div class="project-header">
+                    <div class="project-title">政府システム ビジネスマッチング開発</div>
+                    <div class="project-period">2022年12月～2024年09月</div>
+                </div>
+                <div class="project-role">メンバー | チーム8名</div>
+                <div class="project-description">
+                    企業向け大規模システムのUI/UXデザインとテスト業務。ログイン、マイページ、チャット、検索画面等の設計を担当。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Adobe XD</span>
+                    <span class="tech-item">Photoshop</span>
+                    <span class="tech-item">BigQuery</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="achievements">
+                <h3>🏆 実績・成果</h3>
+                <ul class="achievement-list">
+                    <li><strong>プロジェクト実績：</strong> 開発費3000万円規模のプロジェクトをリードし、納期厳守で完遂</li>
+                    <li><strong>マネジメント：</strong> 5年間のプロジェクトリーダー経験</li>
+                    <li><strong>UI/UX改善：</strong> データ分析に基づくユーザビリティ向上でビジネス成果に貢献</li>
+                    <li><strong>顧客対応：</strong> 直接折衝により要件定義から運用まで一貫したサポートを提供</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- <div class="cta-section fade-in">
+            <h2>一緒に働きませんか？</h2>
+            <a href="mailto:contact@example.com" class="cta-button">お問い合わせ</a>
+        </div> -->
+    </div>
+
+    <script>
+        // Intersection Observer for fade-in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}ms`;
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section, .header');
+            elements.forEach((el, index) => {
+                el.dataset.delay = index * 100;
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
