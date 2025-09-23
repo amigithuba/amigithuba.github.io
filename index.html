@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senior Frontend Engineer Portfolio</title>
     <style>
+        
         * {
             margin: 0;
             padding: 0;
@@ -235,6 +236,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
+            padding-top:16px;
         }
 
         .tech-item {
@@ -350,22 +352,24 @@
             background: #f8f9ff;
         }
 
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .contact-info {
-                justify-content: center;
-            }
-            
-            .project-header {
-                flex-direction: column;
-                gap: 10px;
-            }
+        .project-detail-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
+        .project-detail-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -378,11 +382,105 @@
                 transform: translateY(0);
             }
         }
+
+        /* --- モーダルウィンドウのスタイル --- */
+        .modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:20px; overflow:auto; }
+
+      
+
+        .modal.show {
+            display: block;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 60%;
+            /* max-height: 100vh; */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            animation: zoomIn 0.3s ease;
+        }
+        .modal-image {
+            /* ★変更点: 表示サイズを調整 */
+            max-width: 80vw; /* PC表示で横幅を広く使う */
+            max-height: 80vh; /* 縦方向の最大サイズも指定 */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            animation: zoomIn 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;   /* 角丸を調整 */
+    font-size: 0.95em;
+    font-weight: 600;      /* 文字を少し太くして視認性アップ */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25); /* 最初から影をつけて立体感を出す */
+    margin-top: 20px;      /* 他の要素との余白を調整 */
+    padding: 10px 20px;    /* ボタンのサイズを少し大きく */        
+}
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        .modal-caption {
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #666;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-info {
+                justify-content: center;
+            }
+            .project-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .modal-content {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header fade-in">
+        <header class="header">
             <div class="profile-section">
                 <div class="profile-image"><img src="./profile-illustration.png" alt="プロフィールイラスト"></div>
                 <div class="profile-info">
@@ -396,10 +494,11 @@
                 </div>
             </div>
         </header>
-        <section class="section fade-in">
+
+        <section class="section">
             <h2>🛠️ 技術スキル</h2>
             <div class="skills-grid">
-                <div class="skill-category">
+                 <div class="skill-category">
                     <h3>Frontend Development (6年)</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">HTML5</span>
@@ -458,7 +557,7 @@
             </div>
         </section>
 
-        <section class="section fade-in">
+        <section class="section">
             <h2>💪 強み・特徴</h2>
             <div class="strengths-grid">
                 <div class="strength-card">
@@ -484,7 +583,7 @@
             </div>
         </section>
 
-        <section class="section fade-in">
+        <section class="section">
             <h2>🚀 主要プロジェクト実績</h2>
             <div class="experience-item">
                 <div class="project-header">
@@ -541,10 +640,17 @@
                     <div class="project-period">2019年08月～2024年09月</div>
                 </div>
                 <div class="project-role">プロジェクトリーダー | チーム5名 | 5年間</div>
+                
                 <div class="project-description">
                     顧客向けiOSアプリの保守・運用から新機能開発まで、長期にわたりプロジェクト全体を牽引。
                     顧客折衝、進捗管理、品質管理、見積書作成等のマネジメント業務も並行実施。
                 </div>
+
+                <!-- モーダルを開くボタン -->
+                <a href="#" class="modal-image" id="openModalButton">
+                    プロジェクト推進フローを見る
+                </a>
+                
                 <div class="tech-stack">
                     <span class="tech-item">要件定義</span>
                     <span class="tech-item">HTML/CSS</span>
@@ -574,7 +680,7 @@
             </div>
         </section>
 
-        <section class="section fade-in">
+        <section class="section">
             <div class="achievements">
                 <h3>🏆 実績・成果</h3>
                 <ul class="achievement-list">
@@ -586,45 +692,77 @@
             </div>
         </section>
 
-        <!-- <div class="cta-section fade-in">
-            <h2>一緒に働きませんか？</h2>
-            <a href="mailto:contact@example.com" class="cta-button">お問い合わせ</a>
-        </div> -->
     </div>
 
-    <script>
-        // Intersection Observer for fade-in animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    <!-- ===== ここからモーダル用のHTML ===== -->
+    <div id="imageModal" class="modal">
+        <span class="close-button" id="closeModalButton">&times;</span>
+        <img class="modal-content" id="modalImage" src="" alt="プロジェクト推進フロー">
+        <div class="modal-caption" id="caption">自動車会社 営業支援iOSアプリ開発・運用におけるプロジェクト推進フロー</div>
+    </div>
+    <!-- ===== ここまでモーダル用のHTML ===== -->
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}ms`;
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const elements = document.querySelectorAll('.section, .header');
-            elements.forEach((el, index) => {
-                el.dataset.delay = index * 100;
-                observer.observe(el);
-            });
+    // ===== フェードインアニメーション =====
+    const fadeInElements = document.querySelectorAll('.header, .section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}ms`;
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeInElements.forEach((el, index) => {
+        el.dataset.delay = index * 100;
+        observer.observe(el);
+    });
+
+    // ===== モーダル機能 =====
+    const modal = document.getElementById('imageModal');
+    const openButton = document.getElementById('openModalButton');
+    const closeButton = document.getElementById('closeModalButton');
+    const modalImage = document.getElementById('modalImage');
+
+    // モーダルを開く処理
+    const openModal = (e) => {
+        e.preventDefault(); // リンクのデフォルト動作をキャンセル
+        // ★★ ここに表示したい画像のパスを指定してください ★★
+        modalImage.src = './flow.png'; 
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // 背景のスクロールを禁止
+    };
+
+    // モーダルを閉じる処理
+    const closeModal = () => {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // 背景のスクロール禁止を解除
+    };
+
+    // イベントリスナーを設定
+    if (modal && openButton && closeButton) {
+        openButton.addEventListener('click', openModal);
+        closeButton.addEventListener('click', closeModal);
+
+        // モーダルの背景をクリックした時に閉じる
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
         });
 
-        // Smooth scrolling for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Escapeキーでモーダルを閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
         });
-    </script>
+    }
+});
+</script>
 </body>
 </html>
