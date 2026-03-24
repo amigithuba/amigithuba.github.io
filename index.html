@@ -1,768 +1,436 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senior Frontend Engineer Portfolio</title>
-    <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 300% 100%;
-            animation: gradient 3s ease infinite;
-        }
-
-        @keyframes gradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-        }
-
-        .profile-info h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .profile-info .title {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(102, 126, 234, 0.1);
-            padding: 8px 15px;
-            border-radius: 25px;
-            font-size: 0.9em;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .section h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #333;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-category {
-            background: rgba(102, 126, 234, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #667eea;
-        }
-
-        .skill-category h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-
-        .experience-item {
-            background: rgba(102, 126, 234, 0.03);
-            border-left: 4px solid #667eea;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .experience-item:hover {
-            background: rgba(102, 126, 234, 0.08);
-            transform: translateX(5px);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .project-title {
-            font-size: 1.3em;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .project-period {
-            color: #666;
-            background: rgba(102, 126, 234, 0.1);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-        }
-
-        .project-role {
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .project-description {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding-top:16px;
-        }
-
-        .tech-item {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            border: 1px solid rgba(118, 75, 162, 0.2);
-        }
-
-        .achievements {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .achievements h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .achievement-list {
-            list-style: none;
-        }
-
-        .achievement-list li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .achievement-list li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .strengths-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .strength-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .strength-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .strength-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            color: white;
-            font-size: 20px;
-        }
-
-        .cta-section {
-            text-align: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 40px;
-        }
-
-        .cta-section h2 {
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-
-        .cta-section h2::after {
-            background: white;
-            margin: 10px auto 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .cta-button {
-            background: white;
-            color: #667eea;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            background: #f8f9ff;
-        }
-
-        .project-detail-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-detail-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- モーダルウィンドウのスタイル --- */
-        .modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:20px; overflow:auto; }
-
-      
-
-        .modal.show {
-            display: block;
-            flex-direction: column; 
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-        }
-
-        .modal-content {
-            max-width: 60%;
-            /* max-height: 100vh; */
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-            animation: zoomIn 0.3s ease;
-        }
-        .modal-image {
-            /* ★変更点: 表示サイズを調整 */
-            max-width: 80vw; /* PC表示で横幅を広く使う */
-            max-height: 80vh; /* 縦方向の最大サイズも指定 */
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-            animation: zoomIn 0.3s ease;
-            display: block;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;   /* 角丸を調整 */
-    font-size: 0.95em;
-    font-weight: 600;      /* 文字を少し太くして視認性アップ */
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25); /* 最初から影をつけて立体感を出す */
-    margin-top: 20px;      /* 他の要素との余白を調整 */
-    padding: 10px 20px;    /* ボタンのサイズを少し大きく */        
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Frontend Engineer &amp; UI/UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f0f;--bg2:#161616;--bg3:#1e1e1e;--bg4:#252525;
+  --gold:#d4a853;--gold-l:#e8c47a;--gold-dim:rgba(212,168,83,0.2);--bd:rgba(212,168,83,0.15);
+  --t-primary:#f2ede3;--t-secondary:#ccc5b5;--t-muted:#9e9688;--t-dim:#6e6a62;
+  --neg:#e8a87c;--neg-bg:rgba(232,168,124,0.12);
+  --pos:#7ec8c8;--pos-bg:rgba(126,200,200,0.12);
+  --fs:'Cormorant Garamond',Georgia,serif;
+  --fn:'Noto Sans JP',sans-serif;
+  --fm:'DM Mono',monospace;
 }
-        @keyframes zoomIn {
-            from { transform: scale(0.8); }
-            to { transform: scale(1); }
-        }
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t-primary);font-family:var(--fn);font-weight:300;line-height:1.8;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
 
-        .modal-caption {
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            font-size: 16px;
-        }
-        
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #666;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(15,15,15,0.95);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--bd)}
+.nl{font-family:var(--fm);font-size:.78rem;letter-spacing:.2em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nm{display:flex;gap:2rem;list-style:none}
+.nm a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--t-muted);text-decoration:none;transition:color .25s}
+.nm a:hover{color:var(--gold)}
 
-        .close-button:hover,
-        .close-button:focus {
-            color: #bbb;
-            text-decoration: none;
-        }
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 3rem;position:relative;overflow:hidden}
+.hgl{position:absolute;top:0;bottom:0;width:.5px;background:var(--bd);left:50%}
+.hglh{position:absolute;left:3rem;right:3rem;height:.5px;background:var(--bd);top:50%}
+.heb{font-family:var(--fm);font-size:.72rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem}
+.heb::before{content:'';display:block;width:2rem;height:.5px;background:var(--gold)}
+.hh{font-family:var(--fs);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;line-height:1.12;color:var(--t-primary)}
+.hh em{font-style:italic;color:var(--gold)}
+.ht{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--t-muted);margin-top:1.2rem;margin-bottom:2rem}
+.hd{font-size:1rem;color:var(--t-secondary);max-width:420px;line-height:2;margin-bottom:2.4rem}
+.hr{display:flex;flex-direction:column;align-items:flex-end;padding-left:4rem;gap:2.5rem}
+.hs{text-align:right;border-right:.5px solid var(--bd);padding-right:1.5rem}
+.hsn{font-family:var(--fs);font-size:3rem;font-weight:300;color:var(--gold-l);line-height:1}
+.hsl{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--t-muted);margin-top:.35rem}
+.hscr{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;color:var(--t-dim)}
+.scl{width:.5px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sa 1.8s ease-in-out infinite}
+@keyframes sa{0%,100%{opacity:1}50%{opacity:.3}}
 
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            .contact-info {
-                justify-content: center;
-            }
-            .project-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .modal-content {
-                width: 100%;
-            }
-        }
-    </style>
+/* SECTIONS */
+section{padding:7rem 3rem}
+.sl{font-family:var(--fm);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+.sl::after{content:'';flex:1;max-width:56px;height:.5px;background:var(--gold)}
+.sl-ico{width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:5px;margin-top:-2px;opacity:.85}
+.st{font-family:var(--fs);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;margin-bottom:.5rem;color:var(--t-primary)}
+.st em{font-style:italic;color:var(--gold)}
+
+/* ABOUT */
+#about{background:var(--bg2);border-top:.5px solid var(--bd);border-bottom:.5px solid var(--bd)}
+.ag{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start;margin-top:3rem}
+.ab{font-size:.95rem;color:var(--t-secondary);line-height:2;margin-bottom:1.4rem}
+.ats{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.at{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:.5px solid rgba(212,168,83,.3);padding:.4rem .9rem;transition:all .2s}
+.at:hover{background:var(--gold-dim)}
+.tlw{border-left:.5px solid var(--bd);padding-left:2.5rem}
+.tlh{font-family:var(--fs);font-size:1.1rem;font-weight:300;color:var(--t-muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:.5rem}
+.tl-ico{width:15px;height:15px;color:var(--gold);flex-shrink:0}
+.tli{position:relative;padding:0 0 2rem 1.4rem;border-left:.5px solid var(--bd)}
+.tli:last-child{padding-bottom:0}
+.tld{position:absolute;left:-4.5px;top:.5rem;width:8px;height:8px;background:var(--gold);border-radius:50%}
+.tlp{font-family:var(--fm);font-size:.68rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.3rem}
+.tlr{font-size:.9rem;font-weight:400;color:var(--t-primary);margin-bottom:.25rem;line-height:1.5}
+.tlc{font-size:.8rem;color:var(--t-muted)}
+
+/* AI BLOCK */
+.ai-block{margin-top:2rem;padding:1.3rem 1.5rem;border:.5px solid rgba(126,200,200,0.25);background:rgba(126,200,200,0.04);border-radius:4px}
+.ai-label{font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pos);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.ai-ico{width:15px;height:15px;color:var(--pos);flex-shrink:0}
+.ai-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.ai-tag{font-size:.75rem;color:var(--t-secondary);background:rgba(126,200,200,0.08);border:.5px solid rgba(126,200,200,0.2);padding:.35rem .85rem;border-radius:3px;display:flex;align-items:center;gap:.4rem;transition:all .2s}
+.ai-tag:hover{background:rgba(126,200,200,0.15);border-color:rgba(126,200,200,0.4);color:var(--pos)}
+.ai-dot{width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;opacity:.7}
+.ai-tag-v0{font-family:var(--fm);font-size:.75rem;font-weight:400;color:var(--pos)}
+.ai-desc{font-size:.85rem;color:var(--t-muted);line-height:1.85}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skg{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;margin-top:3rem}
+.skb{padding:2rem;background:var(--bg);border:.5px solid var(--bd);transition:background .3s,border-color .3s}
+.skb:hover{background:var(--bg3);border-color:rgba(212,168,83,.35)}
+.skb.full{grid-column:1/-1}
+.ski{font-family:var(--fm);font-size:.68rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.9rem}
+.skn{font-family:var(--fs);font-size:1.3rem;font-weight:300;margin-bottom:.5rem;color:var(--t-primary);display:flex;align-items:center}
+.sk-ico{width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px;margin-top:-2px;color:var(--gold);flex-shrink:0}
+.skd{font-size:.85rem;color:var(--t-secondary);line-height:1.82}
+.skt{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.sktg{font-size:.68rem;letter-spacing:.08em;color:var(--t-secondary);border:.5px solid rgba(158,150,136,.3);padding:.28rem .62rem;border-radius:2px}
+
+/* WORKS */
+#works{background:var(--bg2);border-top:.5px solid var(--bd);border-bottom:.5px solid var(--bd)}
+.wg{display:grid;gap:2px;margin-top:3rem}
+.wf{border:.5px solid rgba(212,168,83,.4);background:var(--bg2);position:relative;overflow:hidden}
+.wf::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.wfh{display:grid;grid-template-columns:auto 1fr auto;gap:2.5rem;padding:2.5rem;align-items:start}
+.wfn{font-family:var(--fs);font-size:3.5rem;font-weight:300;color:rgba(212,168,83,.12);line-height:1;min-width:60px}
+.wc{font-family:var(--fm);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem}
+.wt{font-family:var(--fs);font-size:1.6rem;font-weight:300;color:var(--t-primary);margin-bottom:.65rem;line-height:1.3}
+.wd{font-size:.9rem;color:var(--t-secondary);line-height:1.9;max-width:560px}
+.wm{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+.wtg{font-size:.68rem;letter-spacing:.08em;color:var(--t-secondary);border:.5px solid var(--bd);padding:.28rem .65rem;border-radius:2px}
+.wa{text-align:right;min-width:110px}
+.wp{font-family:var(--fm);font-size:.7rem;color:var(--t-muted);letter-spacing:.08em;line-height:1.9}
+.wb{display:inline-block;margin-top:.8rem;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:.32rem .8rem}
+
+/* SCREENSHOT */
+.scr-wrap{border-top:.5px solid var(--bd);padding:2rem 2.5rem;background:#0a0a0a}
+.sc-lbl{font-family:var(--fm);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-muted);margin-bottom:.55rem;display:block}
+.sc-br{background:#1c1c1c;border:.5px solid rgba(212,168,83,.22);border-bottom:none;padding:.5rem .9rem;display:flex;align-items:center;gap:.6rem;border-radius:5px 5px 0 0}
+.sc-dt{display:flex;gap:5px}
+.sc-dt span{width:9px;height:9px;border-radius:50%;background:rgba(212,168,83,.25)}
+.sc-u{font-family:var(--fm);font-size:.65rem;color:var(--t-dim);letter-spacing:.05em;flex:1}
+.sc-iw{border:.5px solid rgba(212,168,83,.22);border-top:none;overflow:hidden;border-radius:0 0 3px 3px}
+.sc-iw img{width:100%;display:block;max-height:360px;object-fit:cover;object-position:top}
+
+/* HOSPITAL — always show both desktop + mobile */
+.hosp-row{display:grid;grid-template-columns:1fr 140px;gap:1.5rem;align-items:flex-start;max-width:900px}
+.hosp-d{min-width:0}
+.hosp-m{width:140px}
+.sc-ph{background:#181818;border:2px solid rgba(212,168,83,.35);border-radius:16px;padding:10px 6px}
+.sc-nt{width:38px;height:5px;background:rgba(212,168,83,.2);border-radius:3px;margin:0 auto 8px}
+.sc-pi{border-radius:4px;overflow:hidden}
+.sc-pi img{width:100%;display:block}
+
+/* BEFORE/AFTER */
+.ba-row{display:grid;grid-template-columns:1fr 36px 1fr;gap:1.2rem;align-items:start}
+.ba-arr{font-size:1.5rem;color:var(--gold);align-self:center;text-align:center;font-weight:300;padding-top:1.8rem}
+.ba-bdg{display:inline-block;font-family:var(--fm);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .8rem;margin-bottom:.6rem;border-radius:2px}
+.ba-bdg.bef{background:var(--neg-bg);color:var(--neg);border:.5px solid rgba(232,168,124,.4)}
+.ba-bdg.aft{background:var(--pos-bg);color:var(--pos);border:.5px solid rgba(126,200,200,.4)}
+.ba-pts{margin-top:.75rem;display:flex;flex-direction:column;gap:.45rem}
+.ba-pt{display:flex;align-items:flex-start;gap:.55rem;font-size:.82rem;color:var(--t-secondary);line-height:1.65}
+.ba-dn{width:7px;height:7px;border-radius:50%;background:var(--neg);flex-shrink:0;margin-top:.35rem}
+.ba-dp{width:7px;height:7px;border-radius:50%;background:var(--pos);flex-shrink:0;margin-top:.35rem}
+
+/* KPI + CAR */
+.wfb{padding:2rem 2.5rem;border-top:.5px solid var(--bd)}
+.kpi{display:flex;gap:2.5rem;flex-wrap:wrap;margin-bottom:1.6rem;padding-bottom:1.6rem;border-bottom:.5px solid var(--bd)}
+.ki{display:flex;flex-direction:column;gap:.18rem}
+.kn{font-family:var(--fs);font-size:2rem;font-weight:300;color:var(--gold-l);line-height:1}
+.kl{font-size:.72rem;color:var(--t-muted);letter-spacing:.08em}
+.car{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#0f0f0f}
+.cb{background:var(--bg3);padding:1.4rem 1.5rem}
+.cl{font-family:var(--fm);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.cl::after{content:'';display:block;flex:1;height:.5px;background:rgba(212,168,83,.2)}
+.cl-ico{width:13px;height:13px;flex-shrink:0;opacity:.8}
+.ct{font-size:.85rem;color:var(--t-secondary);line-height:1.9}
+.wfl{font-family:var(--fm);font-size:.75rem;letter-spacing:.1em;color:var(--gold);text-decoration:none;transition:color .25s;display:inline-flex;align-items:center;gap:.4rem}
+.wfl:hover{color:var(--gold-l)}
+.wfl::before{content:'→'}
+
+/* ONBOARDING */
+.ob-wrap{border-top:.5px solid var(--bd);background:#0a0a0a}
+.ob-header{padding:2rem 2.5rem 1.5rem;border-bottom:.5px solid var(--bd)}
+.ob-title-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.ob-ico{width:24px;height:24px;color:var(--pos);flex-shrink:0;margin-top:.1rem}
+.ob-eyebrow{font-family:var(--fm);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pos);margin-bottom:.35rem}
+.ob-title{font-family:var(--fs);font-size:1.3rem;font-weight:300;color:var(--t-primary);line-height:1.3}
+.ob-kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(126,200,200,0.12);border:.5px solid rgba(126,200,200,0.15);border-radius:3px;overflow:hidden}
+.ob-kpi{padding:.9rem 1.2rem;background:#0a0a0a}
+.ob-kpi-label{font-family:var(--fm);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pos);margin-bottom:.35rem;opacity:.8}
+.ob-kpi-val{font-size:.85rem;color:var(--t-secondary);line-height:1.65}
+.ob-kpi-val strong{color:var(--t-primary);font-weight:500}
+/* 3 screenshots grid */
+.ob-screens{padding:2rem 2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ob-sc-item{display:flex;flex-direction:column;gap:.5rem}
+.ob-sc-num{font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pos)}
+.ob-sc-img{border:.5px solid rgba(212,168,83,.22);border-radius:3px;overflow:hidden}
+.ob-sc-img img{width:100%;display:block}
+.ob-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
+.ob-step{background:var(--bg3);padding:1.3rem 1.4rem;display:flex;gap:.9rem;align-items:flex-start}
+.ob-step-num{font-family:var(--fm);font-size:.72rem;color:var(--bg);background:var(--pos);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;line-height:1}
+.ob-step-title{font-size:.88rem;font-weight:500;color:var(--t-primary);margin-bottom:.38rem}
+.ob-step-desc{font-size:.82rem;color:var(--t-secondary);line-height:1.85}
+
+/* STANDARD CARD */
+.wkc{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:2.5rem;padding:2.5rem;background:var(--bg2);border:.5px solid var(--bd);cursor:pointer;transition:background .3s,border-color .3s;position:relative;overflow:hidden}
+.wkc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s}
+.wkc:hover{background:var(--bg3);border-color:rgba(212,168,83,.4)}
+.wkc:hover::before{transform:scaleY(1)}
+.wkn{font-family:var(--fs);font-size:3.5rem;font-weight:300;color:rgba(212,168,83,.1);line-height:1;letter-spacing:-.02em;transition:color .3s;min-width:60px}
+.wkc:hover .wkn{color:rgba(212,168,83,.28)}
+.wkr{display:none;padding:1.6rem 2.5rem 2rem;background:var(--bg3);border:.5px solid var(--bd);border-top:none}
+.wkr.open{display:block}
+.rg{display:flex;gap:2.5rem;flex-wrap:wrap}
+.ri{display:flex;flex-direction:column;gap:.18rem}
+.rn{font-family:var(--fs);font-size:1.9rem;font-weight:300;color:var(--gold-l);line-height:1}
+.rl{font-size:.72rem;color:var(--t-muted);letter-spacing:.08em}
+.rt{margin-top:1.2rem;font-size:.88rem;color:var(--t-secondary);line-height:1.92;border-left:2px solid rgba(212,168,83,.4);padding-left:1rem}
+.tb{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:.5rem;margin-top:1rem;transition:color .2s}
+.tb:hover{color:var(--gold-l)}
+.ta{transition:transform .3s;display:inline-block}
+.tb.open .ta{transform:rotate(90deg)}
+
+footer{padding:1.8rem 3rem;border-top:.5px solid var(--bd);display:flex;justify-content:space-between;align-items:center;font-size:.72rem;letter-spacing:.1em;color:var(--t-dim);background:var(--bg)}
+
+/* FADE-IN */
+.fi{opacity:1;transform:none}
+.js-loaded .fi{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.js-loaded .fi.on{opacity:1;transform:none}
+
+/* ── TABLET ── */
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .nm{gap:1.5rem}
+  #hero{grid-template-columns:1fr;padding:8rem 1.5rem 4rem}
+  .hr,.hgl,.hglh{display:none}
+  section{padding:5rem 1.5rem}
+  .ag{grid-template-columns:1fr;gap:3rem}
+  .tlw{border-left:none;border-top:.5px solid var(--bd);padding-left:0;padding-top:2rem}
+  .skg{grid-template-columns:1fr}
+  .skb.full{grid-column:1}
+  .wfh{grid-template-columns:1fr;gap:1rem;padding:1.5rem}
+  .wfn,.wkn{display:none}
+  .hosp-row{grid-template-columns:1fr 120px;gap:1rem}
+  .hosp-m{width:120px}
+  .ba-row{grid-template-columns:1fr;gap:1rem}
+  .ba-arr{display:none}
+  .car{grid-template-columns:1fr}
+  .wkc{grid-template-columns:1fr;gap:1rem}
+  .wa{text-align:left}
+  .scr-wrap{padding:1.5rem}
+  .wfb{padding:1.5rem}
+  .kpi{gap:1.5rem}
+  .ob-screens{grid-template-columns:repeat(3,1fr);gap:.75rem;padding:1.5rem}
+  .ob-steps{grid-template-columns:1fr}
+  .ob-header{padding:1.5rem}
+  .ob-kpi-row{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.5rem;text-align:center}
+}
+
+/* ── SMARTPHONE 420px基準 ── */
+@media(max-width:600px){
+  nav{padding:.9rem 1.2rem}
+  .nl{font-size:.72rem}
+  .nm{gap:.9rem}
+  .nm a{font-size:.7rem;letter-spacing:.1em}
+  #hero{padding:5.5rem 1.2rem 3rem}
+  .heb{font-size:.65rem;margin-bottom:1rem}
+  .hh{font-size:clamp(2rem,9.5vw,2.8rem);line-height:1.14}
+  .ht{font-size:.7rem;margin-top:.8rem;margin-bottom:1.4rem}
+  .hd{font-size:.9rem;line-height:1.9;margin-bottom:1.6rem}
+  .hscr{display:none}
+  section{padding:3rem 1.2rem}
+  .sl{font-size:.65rem}
+  .st{font-size:clamp(1.5rem,7vw,2rem)}
+  .ag{display:flex;flex-direction:column;gap:2rem;margin-top:1.8rem}
+  .ab{font-size:.88rem;line-height:1.92;margin-bottom:1.1rem}
+  .ats{gap:.38rem;margin-top:1.1rem}
+  .at{font-size:.65rem;padding:.3rem .65rem}
+  .ai-block{padding:1.1rem 1.2rem}
+  .ai-label{font-size:.65rem}
+  .ai-tag{font-size:.72rem}
+  .ai-desc{font-size:.82rem}
+  .tlw{border-left:none;border-top:.5px solid var(--bd);padding-left:0;padding-top:1.5rem}
+  .tlh{font-size:1rem;margin-bottom:1.2rem}
+  .tli{padding:0 0 1.5rem 1.2rem}
+  .tlp{font-size:.65rem}
+  .tlr{font-size:.85rem}
+  .tlc{font-size:.75rem}
+  .skg{display:flex;flex-direction:column;gap:1.5px;margin-top:2rem}
+  .skb,.skb.full{padding:1.3rem 1.2rem}
+  .ski{font-size:.65rem;margin-bottom:.7rem}
+  .skn{font-size:1.1rem}
+  .skd{font-size:.82rem}
+  .skt{gap:.32rem;margin-top:.8rem}
+  .sktg{font-size:.68rem;padding:.22rem .5rem}
+  .wg{gap:1.5px;margin-top:2rem}
+  .wfh{padding:1.2rem;gap:.8rem}
+  .wt{font-size:1.2rem}
+  .wd{font-size:.85rem;max-width:100%}
+  .wm{gap:.3rem;margin-top:.9rem}
+  .wtg{font-size:.65rem;padding:.22rem .48rem}
+  .wa{display:none}
+  .wc{font-size:.65rem;margin-bottom:.45rem}
+  .hosp-row{grid-template-columns:1fr 90px;gap:.75rem}
+  .hosp-m{width:90px}
+  .sc-iw img{max-height:180px}
+  .scr-wrap{padding:1rem 1.2rem}
+  .ba-row{display:flex;flex-direction:column;gap:1rem}
+  .ba-arr{display:none}
+  .ba-bdg{font-size:.62rem}
+  .ba-pts{margin-top:.55rem;gap:.32rem}
+  .ba-pt{font-size:.78rem}
+  .wfb{padding:1.2rem}
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 1.2rem;margin-bottom:1.2rem;padding-bottom:1.2rem}
+  .kn{font-size:1.5rem}
+  .kl{font-size:.68rem}
+  .car{grid-template-columns:1fr;gap:1.5px}
+  .cb{padding:1rem 1.1rem}
+  .cl{font-size:.62rem}
+  .ct{font-size:.82rem}
+  .ob-header{padding:1.2rem}
+  .ob-title{font-size:1.1rem}
+  .ob-kpi-val{font-size:.82rem}
+  .ob-kpi-row{grid-template-columns:1fr}
+  .ob-screens{grid-template-columns:1fr;gap:.75rem;padding:1.2rem}
+  .ob-steps{grid-template-columns:1fr}
+  .ob-step{padding:1rem 1.1rem}
+  .ob-step-title{font-size:.85rem}
+  .ob-step-desc{font-size:.8rem}
+  .wkc{padding:1.2rem;grid-template-columns:1fr;gap:.8rem}
+  .wkr{padding:1.1rem}
+  .rg{gap:1rem;flex-wrap:wrap}
+  .ri{min-width:calc(50% - .5rem)}
+  .rn{font-size:1.4rem}
+  .rl{font-size:.68rem}
+  .rt{font-size:.82rem}
+  .tb{font-size:.68rem;margin-top:.8rem}
+  footer{padding:1.2rem;flex-direction:column;gap:.4rem;font-size:.68rem}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="profile-section">
-                <div class="profile-image"><img src="./profile-illustration.png" alt="プロフィールイラスト"></div>
-                <div class="profile-info">
-                    <h1>Senior Frontend Engineer</h1>
-                    <p class="title">Developer & UI/UX Designer | Project Leader</p>
-                    <div class="contact-info">
-                        <div class="contact-item">📍顧客要望をヒアリングし、要件定義〜プロトタイプ作成を実施</div>
-                        <div class="contact-item">💼8年間のシステム開発経験</div>
-                        <div class="contact-item">🌏 Figma / Adobe XDでのデザインシステム設計</div>
-                    </div>
-                </div>
-            </div>
-        </header>
 
-        <section class="section">
-            <h2>🛠️ 技術スキル</h2>
-            <div class="skills-grid">
-                 <div class="skill-category">
-                    <h3>Frontend Development (6年)</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Vue.js</span>
-                        <span class="skill-tag">Vuetify</span>
-                        <span class="skill-tag">jQuery</span>
-                        <span class="skill-tag">Bootstrap</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>UI/UX Design (7年)</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Adobe XD</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Photoshop</span>
-                        <span class="skill-tag">レスポンシブデザイン</span>
-                        <span class="skill-tag">ユーザビリティ設計</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend & Database</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Firebase</span>
-                        <span class="skill-tag">API連携</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Cloud & Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">GCP</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Google Analytics</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Project Management (5年)</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">プロジェクトリーダー</span>
-                        <span class="skill-tag">進捗管理</span>
-                        <span class="skill-tag">顧客折衝</span>
-                        <span class="skill-tag">品質管理</span>
-                        <span class="skill-tag">見積作成</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Languages & Others</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">英語（実用英検準2級）</span>
-                        <span class="skill-tag">ITパスポート</span>
-                        <span class="skill-tag">Excel VBA</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+<nav>
+  <a class="nl" href="#hero">Portfolio</a>
+  <ul class="nm">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#works">Works</a></li>
+  </ul>
+</nav>
 
-        <section class="section">
-            <h2>💪 強み・特徴</h2>
-            <div class="strengths-grid">
-                <div class="strength-card">
-                    <div class="strength-icon">🎯</div>
-                    <h3>フルスタック対応</h3>
-                    <p>フロントエンド、UI/UXデザインまで、開発ライフサイクル全体をカバー</p>
-                </div>
-                <div class="strength-card">
-                    <div class="strength-icon">👥</div>
-                    <h3>プレイングマネージャー</h3>
-                    <p>最大4名のチーム牽引経験。技術的実装とマネジメント両方を並行して遂行</p>
-                </div>
-                <div class="strength-card">
-                    <div class="strength-icon">💡</div>
-                    <h3>ユーザー中心設計</h3>
-                    <p>単なる機能実装ではなく、エンドユーザーの使いやすさを徹底追求したUI/UX設計</p>
-                </div>
-                <div class="strength-card">
-                    <div class="strength-icon">🤝</div>
-                    <h3>顧客コミュニケーション</h3>
-                    <p>直接的な顧客折衝により要望を的確に把握し、期待値調整と信頼関係構築を実現</p>
-                </div>
-            </div>
-        </section>
+<section id="hero">
+  <div class="hgl"></div><div class="hglh"></div>
+  <div>
+    <p class="heb">Frontend Engineer &amp; UI/UX Designer</p>
+    <h1 class="hh">変化に<br><em>適応する。</em></h1>
+    <p class="ht">経験10年 ／ デザイン × フロントエンド × AI</p>
+    <p class="hd">「デザインしたものを、そのまま自分で作る。」<br>UI/UXデザインからフロントエンド実装まで一人で担い、<br>最新のAIツールを活用しながら素早く価値を届けます。</p>
+  </div>
+  <div class="hr">
+    <div class="hs"><div class="hsn">10</div><div class="hsl">年の実務経験</div></div>
+    <div class="hs"><div class="hsn">5</div><div class="hsl">年のPLリーダー経験</div></div>
+  </div>
+  <div class="hscr"><span>Scroll</span><div class="scl"></div></div>
+</section>
 
-        <section class="section">
-            <h2>🚀 主要プロジェクト実績</h2>
-            <div class="experience-item">
-                <div class="project-header">
-                    <div class="project-title">セキュリティ系WEBシステム 受け入れ試験要領書作成、実施</div>
-                    <div class="project-period">2025年08月〜現在</div>
-                </div>
-                <div class="project-role">メンバー | チーム3名</div>
-                <div class="project-description">
-                    オフショアで作られたコード（フロント側）の受け入れ試験要領書作成、受け入れ試験実施。
-                    オフショア開発観点の要件と顧客の要件を擦り合わせ、試験項目書としての落とし込みを実施。
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-item">英語ドキュメント読み書き</span>
-                    <span class="tech-item">受け入れ試験</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="project-header">
-                    <div class="project-title">オンライン動画配信プラットフォーム UX改善</div>
-                    <div class="project-period">2025年02月～06月</div>
-                </div>
-                <div class="project-role">メンバー | チーム3名</div>
-                <div class="project-description">
-                    管理画面の課題洗い出しから改修まで、ユーザー体験向上を実現するフロントエンド開発を担当。
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-item">Figma</span>
-                    <span class="tech-item">Vue.js</span>
-                    <span class="tech-item">Vuetify</span>
-                    <span class="tech-item">API連携</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="project-header">
-                    <div class="project-title">消防設備点検ソフト PWA化プロジェクト</div>
-                    <div class="project-period">2024年10月～2025年01月</div>
-                </div>
-                <div class="project-role">メンバー | チーム3名</div>
-                <div class="project-description">
-                    既存システムのモバイルWEBアプリケーション化により、現場業務のデジタル化を推進。
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-item">Figma</span>
-                    <span class="tech-item">Quasar</span>
-                    <span class="tech-item">Vue.js</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="project-header">
-                    <div class="project-title">自動車会社 営業支援iOSアプリ</div>
-                    <div class="project-period">2019年08月～2024年09月</div>
-                </div>
-                <div class="project-role">プロジェクトリーダー | チーム5名 | 5年間</div>
-                
-                <div class="project-description">
-                    顧客向けiOSアプリの保守・運用から新機能開発まで、長期にわたりプロジェクト全体を牽引。
-                    顧客折衝、進捗管理、品質管理、見積書作成等のマネジメント業務も並行実施。
-                </div>
-
-                <!-- モーダルを開くボタン -->
-                <a href="#" class="modal-image" id="openModalButton">
-                    プロジェクト推進フローを見る
-                </a>
-                
-                <div class="tech-stack">
-                    <span class="tech-item">要件定義</span>
-                    <span class="tech-item">HTML/CSS</span>
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">Vue.js</span>
-                    <span class="tech-item">Xcode</span>
-                    <span class="tech-item">Tableau</span>
-                    <span class="tech-item">Adobe XD</span>
-                    <span class="tech-item">Photoshop</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="project-header">
-                    <div class="project-title">政府システム ビジネスマッチング開発</div>
-                    <div class="project-period">2022年12月～2024年09月</div>
-                </div>
-                <div class="project-role">メンバー | チーム8名</div>
-                <div class="project-description">
-                    企業向け大規模システムのUI/UXデザインとテスト業務。ログイン、マイページ、チャット、検索画面等の設計を担当。
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-item">Adobe XD</span>
-                    <span class="tech-item">Photoshop</span>
-                    <span class="tech-item">BigQuery</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="achievements">
-                <h3>🏆 実績・成果</h3>
-                <ul class="achievement-list">
-                    <li><strong>プロジェクト実績：</strong> 開発費3000万円規模のプロジェクトをリードし、納期厳守で完遂</li>
-                    <li><strong>マネジメント：</strong> 5年間のプロジェクトリーダー経験</li>
-                    <li><strong>UI/UX改善：</strong> データ分析に基づくユーザビリティ向上でビジネス成果に貢献</li>
-                    <li><strong>顧客対応：</strong> 直接折衝により要件定義から運用まで一貫したサポートを提供</li>
-                </ul>
-            </div>
-        </section>
-
+<section id="about">
+  <p class="sl fi"><svg class="sl-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/></svg>01 — プロフィール</p>
+  <div class="ag">
+    <div class="fi">
+      <h2 class="st" style="margin-bottom:1.5rem">わたしに<em>ついて</em></h2>
+      <p class="ab">IT実務経験10年。医療・自動車・官公庁・メディアなど幅広い業界で、要件定義からデザイン・実装・テストまでを担当。</p>
+      <p class="ab">デザインツール（Figma / Adobe XD）とコーディング（Vue.js / HTML / CSS / JavaScript）を両方こなすことで、デザイン→実装のハンドオフロスを極小化し、高品質なプロダクトを最短で届けることを強みとしています。</p>
+      <div class="ats">
+        <span class="at">Vue.js</span><span class="at">Figma</span><span class="at">Adobe XD</span>
+        <span class="at">HTML/CSS</span><span class="at">JavaScript</span><span class="at">Firebase</span><span class="at">Git</span>
+      </div>
+      <div class="ai-block">
+        <p class="ai-label"><svg class="ai-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zm-9 9a7 7 0 1114 0H4z"/></svg>利用中の AI ツール</p>
+        <div class="ai-tags">
+          <span class="ai-tag"><span class="ai-dot"></span>Claude</span>
+          <span class="ai-tag"><span class="ai-dot"></span>Gemini</span>
+          <span class="ai-tag"><span class="ai-dot"></span>ChatGPT</span>
+          <span class="ai-tag"><span class="ai-dot"></span>GitHub Copilot</span>
+          <span class="ai-tag"><span class="ai-dot"></span>Google AI Studio</span>
+          <span class="ai-tag"><span class="ai-tag-v0">v0</span></span>
+          <span class="ai-tag"><span class="ai-dot"></span>Figma Make</span>
+        </div>
+        <p class="ai-desc">設計・実装・コードレビュー・ドキュメント作成など開発全般にAIを活用。ツールの特性を理解した上で使い分け、開発速度と品質を両立しています。</p>
+      </div>
     </div>
+    <div class="tlw fi">
+      <p class="tlh"><svg class="tl-ico" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="3"/><path d="M10 2v2m0 12v2M2 10h2m12 0h2" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>職歴</p>
+      
+      <div class="tli"><div class="tld"></div><p class="tlp">2019.06 — 2024.09</p><p class="tlr">フロントエンドエンジニア / PL / UI・UXデザイナー</p><p class="tlc">株式会社アゼスト</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2019.06 — 2019.08</p><p class="tlr">UI/UXデザイナー</p><p class="tlc">商業施設アプリ タッチパネル画面デザイン</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2019.08 — 2024.08</p><p class="tlr">プロジェクトリーダー</p><p class="tlc">自動車会社 顧客向け iOS アプリ 保守・運用</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2020.03 — 2024.08</p><p class="tlr">プロジェクトリーダー</p><p class="tlc">病院 Web サイト 運用・保守</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2022.12 — 2024.08</p><p class="tlr">UI/UXデザイナー・テスト担当</p><p class="tlc">政府システム 企業向けシステム開発</p></div>
 
-    <!-- ===== ここからモーダル用のHTML ===== -->
-    <div id="imageModal" class="modal">
-        <span class="close-button" id="closeModalButton">&times;</span>
-        <img class="modal-content" id="modalImage" src="" alt="プロジェクト推進フロー">
-        <div class="modal-caption" id="caption">自動車会社 営業支援iOSアプリ開発・運用におけるプロジェクト推進フロー</div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2024.10 — Present</p><p class="tlr">フロントエンドエンジニア / PMO<br><span style="font-size:.78rem;color:var(--t-muted)">現在：クラウド化プロジェクト PMO</span></p><p class="tlc">株式会社エンジーニアス（SES）</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2024.10 — 2025.01</p><p class="tlr">UI/UXデザイン・要件定義</p><p class="tlc">消防設備点検ソフトの刷新（モバイルWEB PWA化）</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2025.02 — 2025.06</p><p class="tlr">UX改善提案・フロントエンド開発</p><p class="tlc">動画配信プラットフォームの管理画面 UX改善</p></div>
+      <div class="tli"><div class="tld"></div><p class="tlp">2025.08 — Present</p><p class="tlr">受入試験実施・英語ドキュメント翻訳</p><p class="tlc">セキュリティ系のWEBシステム（オフショア開発）</p></div>
     </div>
-    <!-- ===== ここまでモーダル用のHTML ===== -->
+  </div>
+</section>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+<section id="skills">
+  <p class="sl fi"><svg class="sl-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M9 12l-4-4 1.4-1.4L9 9.2l4.6-4.6L15 6l-6 6zM10 2a8 8 0 100 16A8 8 0 0010 2z"/></svg>02 — スキル</p>
+  <h2 class="st fi">スキル &amp; <em>強み</em></h2>
+  <div class="skg fi">
+    <div class="skb"><p class="ski">[ 01 ]</p><p class="skn"><svg class="sk-ico" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>フロントエンド開発</p><p class="skd">HTML/CSS の精緻なコーディングから Vue.js による SPA 構築まで。パフォーマンスとアクセシビリティを意識した実装。</p><div class="skt"><span class="sktg">Vue.js</span><span class="sktg">JavaScript</span><span class="sktg">HTML/CSS</span><span class="sktg">Firebase</span><span class="sktg">Bootstrap</span></div></div>
+    <div class="skb"><p class="ski">[ 02 ]</p><p class="skn"><svg class="sk-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm3 4h6v2H7V6zm0 4h4v2H7v-2z"/></svg>UI / UXデザイン</p><p class="skd">Figma・Adobe XD を用いたプロトタイプ設計からユーザビリティ検証まで。デザインシステム構築・ハンドオフ効率化が得意。</p><div class="skt"><span class="sktg">Figma</span><span class="sktg">Adobe XD</span><span class="sktg">Photoshop</span><span class="sktg">Responsive Design</span><span class="sktg">PWA</span></div></div>
+    <div class="skb"><p class="ski">[ 03 ]</p><p class="skn"><svg class="sk-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM6 8a2 2 0 11-4 0 2 2 0 014 0zm9.292 9H16a4 4 0 00-8 0H2.708A7.001 7.001 0 0110 13a7 7 0 017.292 4z"/></svg>プロジェクトリーダー</p><p class="skd">5名以下のチームでのリード経験5年。顧客折衝・見積・進捗管理・品質管理を一手に担当。医療・自動車・官公庁など多業界対応。</p><div class="skt"><span class="sktg">顧客折衝</span><span class="sktg">進捗管理</span><span class="sktg">品質管理</span><span class="sktg">見積作成</span><span class="sktg">テスト設計</span></div></div>
+    <div class="skb"><p class="ski">[ 04 ]</p><p class="skn"><svg class="sk-ico" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>開発ワークフロー</p><p class="skd">Git を用いたバージョン管理とチーム開発。オフショア開発での英語ドキュメント翻訳・管理経験あり。</p><div class="skt"><span class="sktg">Git</span><span class="sktg">Sourcetree</span><span class="sktg">Xcode</span><span class="sktg">XML</span></div></div>
+    <div class="skb full"><p class="ski">[ 05 ]</p><p class="skn"><svg class="sk-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5 8.13V11a1 1 0 00.553.894l4 2a1 1 0 00.894 0l4-2A1 1 0 0015 11V8.13l2.394-1.21a1 1 0 000-1.84l-7-3z"/></svg>対応業界・ドメイン</p><p class="skd">医療・自動車・官公庁・メディア・小売など多様な業界での開発経験。各ドメインの規制・慣習を理解した上での設計が可能。</p><div class="skt"><span class="sktg">Healthcare</span><span class="sktg">Automotive</span><span class="sktg">Government</span><span class="sktg">Media</span></div></div>
+  </div>
+</section>
 
-    // ===== フェードインアニメーション =====
-    const fadeInElements = document.querySelectorAll('.header, .section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}ms`;
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+<section id="works">
+  <p class="sl fi"><svg class="sl-ico" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3 1h10v2H5V6zm0 4h6v2H5v-2z"/></svg>03 — 制作実績</p>
+  <h2 class="st fi">制作 <em>実績</em></h2>
+  <div class="wg fi">
 
-    fadeInElements.forEach((el, index) => {
-        el.dataset.delay = index * 100;
-        observer.observe(el);
-    });
+    <div class="wf">
+      <div class="wfh">
+        <div class="wfn">01</div>
+        <div>
+          <p class="wc">医療 — Web運用 &amp; UX改善</p>
+          <h3 class="wt">病院 Web サイト 運用・UX 改善</h3>
+          <p class="wd">都内専門病院のWebサイト全体をPLとして担当。サーバ移管・情報アーキテクチャ改善・コンテンツ更新フロー整備・UX改善まで、2名体制で5年以上の長期安定運用を実現。</p>
+          <div class="wm"><span class="wtg">HTML/CSS</span><span class="wtg">JavaScript</span><span class="wtg">Firebase</span><span class="wtg">Git</span><span class="wtg">Photoshop</span><span class="wtg">Adobe XD</span></div>
+        </div>
+        <div class="wa"><p class="wp">2020.03<br>— 2024.08</p><span class="wb">PL</span></div>
+      </div>
+      <div class="scr-wrap">
+        <div class="hosp-row">
+          <div class="hosp-d">
+            <span class="sc-lbl">Desktop View</span>
+            <div class="sc-br"><div class="sc-dt"><span></span><span></span><span></span></div><span class="sc-u">hospital-website.jp</span></div>
+            <div class="sc-iw"><img src="data:image/jpeg;base64,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"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // ===== モーダル機能 =====
-    const modal = document.getElementById('imageModal');
-    const openButton = document.getElementById('openModalButton');
-    const closeButton = document.getElementById('closeModalButton');
-    const modalImage = document.getElementById('modalImage');
-
-    // モーダルを開く処理
-    const openModal = (e) => {
-        e.preventDefault(); // リンクのデフォルト動作をキャンセル
-        // ★★ ここに表示したい画像のパスを指定してください ★★
-        modalImage.src = 'flow.png'; 
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // 背景のスクロールを禁止
-    };
-
-    // モーダルを閉じる処理
-    const closeModal = () => {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto'; // 背景のスクロール禁止を解除
-    };
-
-    // イベントリスナーを設定
-    if (modal && openButton && closeButton) {
-        openButton.addEventListener('click', openModal);
-        closeButton.addEventListener('click', closeModal);
-
-        // モーダルの背景をクリックした時に閉じる
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Escapeキーでモーダルを閉じる
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('show')) {
-                closeModal();
-            }
-        });
-    }
-});
-</script>
 </body>
 </html>
